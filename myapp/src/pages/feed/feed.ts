@@ -30,6 +30,8 @@ export class FeedPage {
 
   public nomeUsuario: string = 'Charles Franca do Codigo';
 
+  public listaFilmes = new Array<any>();
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private movieProvider: MovieProvider) {
   }
 
@@ -42,7 +44,7 @@ export class FeedPage {
     console.log('ionViewDidLoad FeedPage');
 
     this.movieProvider.getPopularMovies().subscribe(resp => {
-      console.log(resp);
+      this.listaFilmes = resp['results'];
     }, error => {
       console.error(error);
     })
