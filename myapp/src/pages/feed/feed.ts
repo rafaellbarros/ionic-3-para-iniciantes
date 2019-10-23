@@ -41,8 +41,8 @@ export class FeedPage {
     // this.somaDoisNumeros(10, 99);
     console.log('ionViewDidLoad FeedPage');
 
-    this.movieProvider.getLatestMovies().subscribe(resp => {
-      console.warn(resp);
+    this.movieProvider.getPopularMovies().subscribe(resp => {
+      console.log(resp);
     }, error => {
       console.error(error);
     })
