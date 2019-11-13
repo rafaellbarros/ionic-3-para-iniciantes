@@ -1,3 +1,6 @@
+import { PerfilPageModule } from './../pages/perfil/perfil.module';
+import { SobrePageModule } from './../pages/sobre/sobre.module';
+import { ConfiguracoesPageModule } from './../pages/configuracoes/configuracoes.module';
 import { FeedPageModule } from './../pages/feed/feed.module';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,6 +32,9 @@ import { HttpClientModule } from '@angular/common/http';
     FeedPageModule,
     IntroPageModule,
     HttpClientModule,
+    ConfiguracoesPageModule,
+    SobrePageModule,
+    PerfilPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
