@@ -13,12 +13,10 @@ export class MovieProvider {
   private movieUrl = 'https://api.themoviedb.org/3/movie';
   private apiKey = 'XPTO';
 
-  constructor(public http: HttpClient) {
-    console.log('Hello MovieProvider Provider');
-  }
+  constructor(public http: HttpClient) { }
 
-  getPopularMovies() {
-    return this.http.get(`${this.movieUrl}/popular?api_key=${this.apiKey}`);
+  getPopularMovies(page = 1) {
+    return this.http.get(`${this.movieUrl}/popular?page=${page}&api_key=${this.apiKey}`);
   }
 
   getMovieDetails(filmeId) {

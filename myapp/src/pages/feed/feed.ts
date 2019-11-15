@@ -32,10 +32,12 @@ export class FeedPage {
   public nomeUsuario: string = 'Charles Franca do Codigo';
 
   public listaFilmes = new Array<any>();
+  public page = 1;
 
   public loader;
   public refresher;
   public isRefreshing: boolean = false;
+  public infiniteScroll;
 
   constructor(
     public navCtrl: NavController, 
@@ -76,12 +78,23 @@ export class FeedPage {
     this.carregarFilmes();
   }
 
-  carregarFilmes() {
-    this.abreCarregando();
-    console.log('ionViewDidEnter FeedPage');
+  doInfinite(infiniteScroll) {
+    this.page++;
+    this.infiniteScroll = infiniteScroll;
+    this.carregarFilmes(true);
+  }
 
-    this.movieProvider.getPopularMovies().subscribe(resp => {
-      this.listaFilmes = resp['results'];
+  carregarFilmes(newPage: boolean = false) {
+    this.abreCarregando();
+    this.movieProvider.getPopularMovies(this.page).subscribe(resp => {
+      
+      if (newPage) {
+        this.listaFilmes = this.listaFilmes.concat(resp['results']);
+        this.infiniteScroll.complete();
+      } else {
+        this.listaFilmes = resp['results'];
+      }
+      
       this.fechaCarregando();
       if (this.isRefreshing) {
         this.refresher.complete();
