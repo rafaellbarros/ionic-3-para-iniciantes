@@ -20,4 +20,8 @@ export class MovieProvider {
   getPopularMovies() {
     return this.http.get(`${this.movieUrl}/popular?api_key=${this.apiKey}`);
   }
+
+  getMovieDetails(filmeId) {
+    return this.http.get(`${this.movieUrl}/${filmeId}?api_key=${this.apiKey}`);
+  }
 }

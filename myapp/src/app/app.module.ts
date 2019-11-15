@@ -1,3 +1,4 @@
+import { FilmeDetalhesPageModule } from './../pages/filme-detalhes/filme-detalhes.module';
 import { PerfilPageModule } from './../pages/perfil/perfil.module';
 import { SobrePageModule } from './../pages/sobre/sobre.module';
 import { ConfiguracoesPageModule } from './../pages/configuracoes/configuracoes.module';
@@ -34,7 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ConfiguracoesPageModule,
     SobrePageModule,
-    PerfilPageModule
+    PerfilPageModule,
+    FilmeDetalhesPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
