@@ -33,12 +33,18 @@ export class FeedPage {
   public listaFilmes = new Array<any>();
 
   public loader;
+  public refresher;
+  public isRefreshing: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     private movieProvider: MovieProvider, 
     public loadingCtrl: LoadingController) {
+  }
+
+  ionViewDidEnter() {
+    this.carregarFilmes();
   }
 
   abreCarregando() {
@@ -58,17 +64,30 @@ export class FeedPage {
      alert(num1 + num2)
   }
 
-  ionViewDidEnter() {
+  doRefresh(refresher) {
+    this.refresher = refresher;
+    this.isRefreshing = true;
+    this.carregarFilmes();
+  }
+
+  carregarFilmes() {
     this.abreCarregando();
     console.log('ionViewDidEnter FeedPage');
 
     this.movieProvider.getPopularMovies().subscribe(resp => {
       this.listaFilmes = resp['results'];
       this.fechaCarregando();
+      if (this.isRefreshing) {
+        this.refresher.complete();
+        this.isRefreshing = false;
+      }
     }, error => {
       console.error(error);
+      this.fechaCarregando();
+      if (this.isRefreshing) {
+        this.refresher.complete();
+        this.isRefreshing = false;
+      }
     });
-
   }
-
 }
